@@ -24,7 +24,7 @@
 	<bean id="dataSource"
 		class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
 		<!-- 数据库基本信息配置 -->
-		<property name="driverClassName" value="${driverClassName}" />
+		<property name="driverClassName" value="${driver}" />
 		<property name="url" value="${url}" />
 		<property name="username" value="${usn}" />
 		<property name="password" value="${psd}" />
@@ -58,29 +58,6 @@
 		<property name="logAbandoned" value="${logAbandoned}" />
 	</bean>
 
-	<!-- 第二部分：整合mybatis及配置SessionFactory(使用mybatis的) -->
-
-	<!-- Spring声明式事务 -->
-	<bean id="sqlSessionFactory"
-		class="org.mybatis.spring.SqlSessionFactoryBean">
-		<!-- 配置数据库连接池 -->
-		<property name="dataSource" ref="dataSource"></property>
-		<!-- 加载mybatis-config文件 -->
-		<property name="configLocation"
-			value="classpath:mybatis.cfg.xml"></property>
-		<!-- 扫描domain下的实体,方便在mapper下的xml中使用别名,例如User则会找到xx.domain.User -->
-		<!-- <property name="typeAliasesPackage" value="xx.domain" /> -->
-		<!-- 自动扫描mapper下的Xx.xml文件 件 -->
-		<property name="mapperLocations"
-			value="classpath:mapper/*.xml" />
-	</bean>
-	
-	<!-- DAO接口所在包名，Spring会自动查找其下的类并注入到Spring的容器中 -->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="mapper"/>
-        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
-    </bean>
-
 	<!-- 事务管理(dataSource数据源名字要对上) -->
 	<bean id="txManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -90,4 +67,29 @@
 	<!-- 使用声明式事务,注解方式(txManager名字要对上) -->
 	<tx:annotation-driven
 		transaction-manager="txManager" />
+
+	<!-- 第二部分：整合mybatis及配置SessionFactory(使用mybatis的) -->
+
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 配置数据库连接池(dataSource名字要对应) -->
+		<property name="dataSource" ref="dataSource"></property>
+		<!-- 加载mybatis-config文件 -->
+		<property name="configLocation"
+			value="classpath:mybatis.cfg.xml"></property>
+		<!-- 扫描xxPackage下的实体,方便在mapper下的xml中使用别名,例如User则会找到xxPackage.User -->
+		<!-- 不建议写，xml写全限定类名容易纠错 -->
+		<!-- <property name="typeAliasesPackage" value="xx.domain" /> -->
+		<!-- 自动扫描mapper下的xx.xml文件 -->
+		<property name="mapperLocations"
+			value="classpath:mapper/*.xml" />
+	</bean>
+
+	<!-- Mapper接口所在包名，Spring会自动查找其下的类并注入到Spring的容器中 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="mapper" />
+		<!-- 配置sqlSessionFactory,注意名字(sqlSessionFactory) -->
+		<property name="sqlSessionFactoryBeanName"
+			value="sqlSessionFactory" />
+	</bean>
 </beans>

@@ -86,6 +86,6 @@
 		<url-pattern>/druid/*</url-pattern>
 	</servlet-mapping>
 	<!-- 连接池 启用Web监控统计功能 end -->
-	<!-- 返回问地址 http://ip地址：端口号/项目名称/druid/index.html -->
+	<!-- 返回问地址 http://ip地址:端口号/项目名称/druid/index.html -->
 
 </web-app>

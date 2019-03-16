@@ -33,7 +33,7 @@
 					<td>${u.age}</td>
 					<td>
 						<button type="button" class="btn btn-info btn-xs" id="see">详情</button>
-						&brvbar;
+						|
 						<button type="button" class="btn btn-danger btn-xs" id="del">删除</button>
 					</td>
 				</tr>
