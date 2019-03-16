@@ -1,6 +1,6 @@
-#eclipse files
-.classpath
-.project
+﻿#eclipse files
+# .classpath
+# .project
 
 # Built application files
 *.apk
@@ -43,6 +43,5 @@ captures/
 *.jks
 
 # 自定义
-/target/
-.classpath
-.project
+
+# /target/
