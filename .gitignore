@@ -41,3 +41,8 @@ captures/
 
 # Keystore files
 *.jks
+
+# 自定义
+/target/
+.classpath
+.project
