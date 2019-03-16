@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration  
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!-- mybatis配置信息（数据库连接、Mybatis别名、Mapper.xml映射位置会在spring中配置） -->
+<configuration>
+	<!-- 配置打印 SQL 到控制台 以及懒加载 -->
+	<settings>
+		<!-- 日志实现 -->
+		<setting name="logImpl" value="SLF4J" />
+		<!-- 在所有的SQL映射路径上加上“sql:”这个前缀 -->
+		<setting name="logPrefix" value="sql:" />
+		<!-- 打开延迟加载的全局开关 -->
+		<setting name="lazyLoadingEnabled" value="true" />
+		<setting name="aggressiveLazyLoading" value="false" />
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+		<!--开启数据库字段自动映射为驼峰命名 -->
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+	</settings>
+</configuration> 
